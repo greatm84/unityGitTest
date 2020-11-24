@@ -39,15 +39,11 @@ public class manmove : MonoBehaviour {
             Debug.Log("no key");
             return;
         }
-        /*
-        var data = inputData.text;
 
-        KPref.Inst().put(key, data);
-        Debug.Log($"save comp {key}, {data}");
-        */
+        var service = new DbService("TempDb");
+        service.createTable<Animal>();
 
-        var data = new People(11, "KSH", 50, 20, 85);
-        KPref.put(key, data);
+        service.insert(new Animal() {Cid = 1000, Name = "Babo" });
     }
 
     public void CallButtonQuery() {
@@ -59,10 +55,30 @@ public class manmove : MonoBehaviour {
         /*
         var data = KPref.Inst().getString(key);
         txtResult.text = data;
-        */
+        
 
         var data = KPref.getObject<People>(key);
         txtResult.text = data.ToString();
+        */
+
+        var service = new DbService("TempDb");
+        service.createTable<Animal>();
+
+        var data = service.getList<Animal>();
+        
+        foreach(var anim in data) {
+            Debug.Log($"{anim.Cid} {anim.Name}");
+        }
+    }
+
+    public class Animal {
+        public int Cid { get; set; }
+
+        public string Name { get; set; }
+
+        public override string ToString() {
+            return string.Format($"[Animal: Cid={Cid}, Name={Name}]");
+        }
     }
 
     class People{
