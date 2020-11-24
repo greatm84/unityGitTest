@@ -41,9 +41,8 @@ public class manmove : MonoBehaviour {
         }
 
         var service = new DbService("TempDb");
-        service.createTable<Animal>();
-
-        service.insert(new Animal() {Cid = 1000, Name = "Babo" });
+        service.createTable<HeroChamp>();
+        service.insert(new HeroChamp() { Id= 1000, Name = "KSH", Str = 50});
     }
 
     public void CallButtonQuery() {
@@ -59,7 +58,7 @@ public class manmove : MonoBehaviour {
 
         var data = KPref.getObject<People>(key);
         txtResult.text = data.ToString();
-        */
+        
 
         var service = new DbService("TempDb");
         service.createTable<Animal>();
@@ -68,6 +67,13 @@ public class manmove : MonoBehaviour {
         
         foreach(var anim in data) {
             Debug.Log($"{anim.Cid} {anim.Name}");
+        }
+        */
+
+        var service = new DbService("TempDb");
+        var data = service.getList<HeroChamp>();
+        foreach (var hero in data) {
+            Debug.Log($"{hero.Id} {hero.Name}");
         }
     }
 
@@ -79,21 +85,5 @@ public class manmove : MonoBehaviour {
         public override string ToString() {
             return string.Format($"[Animal: Cid={Cid}, Name={Name}]");
         }
-    }
-
-    class People{
-        public int Id;
-        public string Name;
-        public int Strength;
-        public int Intelligent;
-        public int Dex;
-
-        public People(int id, string name, int strength, int intelligent, int dex) {
-            Id = id;
-            Name = name;
-            Strength = strength;
-            Intelligent = intelligent;
-            Dex = dex;
-        }
-    }
+    }    
 }
