@@ -42,7 +42,7 @@ public class manmove : MonoBehaviour {
 
         var service = new DbService("TempDb");
         service.createTable<HeroChamp>();
-        service.insert(new HeroChamp() { Id= 1000, Name = "KSH", Str = 50});
+        service.insertOrReplace(new HeroChamp() { Id= 1000, Name = "KSH", Str = 50});
     }
 
     public void CallButtonQuery() {
@@ -73,7 +73,7 @@ public class manmove : MonoBehaviour {
         var service = new DbService("TempDb");
         var data = service.getList<HeroChamp>();
         foreach (var hero in data) {
-            Debug.Log($"{hero.Id} {hero.Name}");
+            Debug.Log($"{hero.Id} {hero.Str }");
         }
     }
 

@@ -1,8 +1,6 @@
 ﻿using SQLite4Unity3d;
 
-public class BaseChamp {
-    protected static string sQueryText = null;
-
+public class BaseChamp {   
     [PrimaryKey]
     public int Id { get; set; }
     public string Name { get; set; }
